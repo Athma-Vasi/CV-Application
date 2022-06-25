@@ -23,7 +23,7 @@ const samplePersonal = new Map([
 
 const sampleWorkExp = new Map([
 	[
-		'workExp0',
+		'temp',
 		{
 			companyName: 'Cosa Nostra Pizzas',
 			locationWork: 'San Francisco, CA',

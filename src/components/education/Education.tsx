@@ -4,23 +4,35 @@ import Input from '../styled-generics/Input'
 import Wrapper from '../styled-generics/Wrapper'
 import Container from '../styled-generics/Container'
 import { sampleEducation } from '../../sampleData'
-import { EducationKeys, EducationMap, Dispatch, Action } from '../../types'
+import { EducationKeys, EducationMap, Dispatch, Action, AppState } from '../../types'
 
 export default function Education({
 	dispatch,
 	action,
+	state,
 }: {
 	dispatch: React.Dispatch<Dispatch>
 	action: Action
+	state: AppState
 }): JSX.Element {
 	const now = new Date()
 	const [education, setEducation] = useState(sampleEducation)
-	const [educationAmounts, setEducationAmounts] = useState(0)
 
 	function handleEducationChange(name: EducationKeys | string, value: string): void {
 		const clone: EducationMap = structuredClone(education)
 
-		const educationObj = clone.get(`education${educationAmounts}`)
+		if (!clone.has(`education${state.multipleEducationAmounts}`)) {
+			clone.set(`education${state.multipleEducationAmounts}`, {
+				uni: '',
+				locationUni: '',
+				fromUni: '',
+				toUni: '',
+				degree: '',
+				descriptionUni: '',
+			})
+		}
+
+		const educationObj = clone.get(`education${state.multipleEducationAmounts}`)
 		if (educationObj) educationObj[name as EducationKeys] = value
 
 		setEducation(clone)
@@ -35,33 +47,13 @@ export default function Education({
 		})
 	}
 
-	function handleMultipleEducationAmounts(
-		ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
-	) {
-		ev.preventDefault()
-		setEducationAmounts(educationAmounts + 1)
-
-		dispatch({
-			type: action.updateMultipleEducationAmounts,
-			payload: {
-				allInfo: {},
-				updateMultipleEducationAmounts: educationAmounts,
-			},
-		})
-	}
-
 	return (
 		<>
 			<Wrapper>
 				<Container>
 					<form action="#" id="form-education">
 						<fieldset>
-							<legend>
-								Education{' '}
-								<button type="button" onClick={handleMultipleEducationAmounts}>
-									➕
-								</button>
-							</legend>
+							<legend>Education </legend>
 							<Card>
 								<label htmlFor="uni">Place of education: </label>
 								<Input

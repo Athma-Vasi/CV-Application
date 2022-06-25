@@ -34,7 +34,9 @@ export default function Preview({
 
 			<h3>Work Experience</h3>
 			{Object.entries(Object.fromEntries(workExp)).map(([_, values]) => {
-				return Object.entries(values).map(([key, value]) => <p key={key}>{value}</p>)
+				return Object.entries(values).map(([key, value]) => (
+					<p key={crypto.randomUUID()}>{value}</p>
+				))
 			})}
 
 			<h3>Education</h3>

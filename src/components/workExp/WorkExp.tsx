@@ -3,27 +3,40 @@ import Input from '../styled-generics/Input'
 import Wrapper from '../styled-generics/Wrapper'
 import Container from '../styled-generics/Container'
 
-import { WorkExpMap, WorkExpKeys, Dispatch, Action } from '../../types'
+import { WorkExpMap, WorkExpKeys, Dispatch, Action, AppState } from '../../types'
 import { sampleWorkExp } from '../../sampleData'
 import { useState } from 'react'
-import Button from '../styled-generics/Button'
 
 export default function WorkExp({
 	dispatch,
 	action,
+	state,
 }: {
 	dispatch: React.Dispatch<Dispatch>
 	action: Action
+	state: AppState
 }): JSX.Element {
 	const now = new Date()
 
 	const [workExp, setWorkExp] = useState(sampleWorkExp)
-	const [workExpAmounts, setWorkExpAmounts] = useState(0)
 
 	function handleWorkExpChange(name: WorkExpKeys | string, value: string): void {
 		const clone: WorkExpMap = structuredClone(workExp)
 
-		const workExpObj = clone.get(`workExp${workExpAmounts}`)
+		if (clone.has('temp')) clone.delete('temp')
+
+		if (!clone.has(`workExp${state.multipleWorkExpAmounts}`)) {
+			clone.set(`workExp${state.multipleWorkExpAmounts}`, {
+				companyName: '',
+				locationWork: '',
+				fromWork: '',
+				toWork: '',
+				role: '',
+				descriptionWork: '',
+			})
+		}
+
+		const workExpObj = clone.get(`workExp${state.multipleWorkExpAmounts}`)
 		if (workExpObj) workExpObj[name as WorkExpKeys] = value
 
 		setWorkExp(clone)
@@ -38,33 +51,13 @@ export default function WorkExp({
 		})
 	}
 
-	function handleWorkExpAmountsChange(
-		ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
-	) {
-		ev.preventDefault()
-		setWorkExpAmounts(workExpAmounts + 1)
-
-		dispatch({
-			type: action.updateMultipleWorkExpAmounts,
-			payload: {
-				allInfo: {},
-				updateMultipleWorkExpAmounts: workExpAmounts,
-			},
-		})
-	}
-
 	return (
 		<>
 			<Wrapper>
 				<Container>
 					<form action="#" id="form-workExp">
 						<fieldset>
-							<legend>
-								Work Experience{' '}
-								<button type="button" onClick={handleWorkExpAmountsChange}>
-									➕
-								</button>
-							</legend>
+							<legend>Work Experience</legend>
 							<Card>
 								<label htmlFor="companyName">Company name: </label>
 								<Input

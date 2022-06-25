@@ -51,8 +51,8 @@ type AppState = {
 		skills: SkillsMap
 	}
 	isDarkMode: boolean
-	multipleWorkExpAmounts: number
-	multipleEducationAmounts: number
+	multipleWorkExpAmounts: number[]
+	multipleEducationAmounts: number[]
 }
 
 type Dispatch = {

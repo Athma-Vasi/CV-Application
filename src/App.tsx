@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import React, { cloneElement, useReducer } from 'react'
 import './App.css'
 
 import Personal from './components/personal/Personal'
@@ -6,15 +6,7 @@ import Preview from './components/preview/Preview'
 import WorkExp from './components/workExp/WorkExp'
 import Education from './components/education/Education'
 import Skills from './components/skills/Skills'
-import {
-	AppState,
-	Dispatch,
-	Action,
-	PersonalMap,
-	WorkExpMap,
-	EducationMap,
-	SkillsMap,
-} from './types'
+import { AppState, Dispatch, Action } from './types'
 
 import {
 	sampleEducation,
@@ -31,8 +23,8 @@ const initialState: AppState = {
 		skills: sampleSkills,
 	},
 	isDarkMode: false,
-	multipleWorkExpAmounts: 0,
-	multipleEducationAmounts: 0,
+	multipleWorkExpAmounts: [0],
+	multipleEducationAmounts: [0],
 }
 
 const action: Action = {
@@ -83,11 +75,15 @@ const reducer = (state: AppState, action: Dispatch) => {
 			return clone
 		}
 		case 'updateMultipleWorkExpAmounts': {
-			clone.multipleWorkExpAmounts += 1
+			if (action.payload.updateMultipleWorkExpAmounts) {
+				clone.multipleWorkExpAmounts.push(action.payload.updateMultipleWorkExpAmounts)
+			}
 			return clone
 		}
 		case 'updateMultipleEducationAmounts': {
-			clone.multipleEducationAmounts += 1
+			if (action.payload.updateMultipleEducationAmounts) {
+				clone.multipleEducationAmounts.push(action.payload.updateMultipleEducationAmounts)
+			}
 			return clone
 		}
 
@@ -100,29 +96,85 @@ function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	console.log(state)
 
-	const displayMultipleWorkExp = (
-		workExps: number,
+	// const displayMultipleWorkExp = ((
+	// 	workExpAmounts: number,
+	// 	dispatch: React.Dispatch<Dispatch>,
+	// 	action: Action
+	// ): JSX.Element[] => {
+	// 	const temp: JSX.Element[] = []
+
+	// 	for (let i = 0; i <= workExpAmounts; i++) {
+	// 		temp.push(<WorkExp state={state} dispatch={dispatch} action={action}></WorkExp>)
+	// 	}
+
+	// 	return temp
+	// })(state.multipleWorkExpAmounts, dispatch, action)
+
+	function handleNewWorkExpClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		dispatch({
+			type: action.updateMultipleWorkExpAmounts,
+			payload: {
+				allInfo: {},
+				updateMultipleWorkExpAmounts:
+					state.multipleWorkExpAmounts[state.multipleWorkExpAmounts.length - 1] + 1,
+			},
+		})
+	}
+
+	function handleNewEducationClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+		dispatch({
+			type: action.updateMultipleEducationAmounts,
+			payload: {
+				allInfo: {},
+				updateMultipleEducationAmounts:
+					state.multipleEducationAmounts[state.multipleEducationAmounts.length - 1] + 1,
+			},
+		})
+	}
+
+	const renderForms = (function (
+		state: AppState,
 		dispatch: React.Dispatch<Dispatch>,
 		action: Action
-	) => {
+	): JSX.Element[] {
 		const temp: JSX.Element[] = []
 
-		for (let i = 0; i < workExps; i++) {
-			temp.push(<WorkExp key={i} dispatch={dispatch} action={action}></WorkExp>)
+		temp.push(<Personal dispatch={dispatch} action={action}></Personal>)
+
+		temp.push(
+			<button type="button" onClick={handleNewWorkExpClick}>
+				Add new work
+			</button>
+		)
+
+		for (let i = 0; i < state.multipleWorkExpAmounts.length; i++) {
+			temp.push(<WorkExp state={state} dispatch={dispatch} action={action}></WorkExp>)
+		}
+
+		temp.push(
+			<button type="button" onClick={handleNewEducationClick}>
+				Add new education
+			</button>
+		)
+
+		for (let i = 0; i < state.multipleEducationAmounts.length; i++) {
+			temp.push(<Education state={state} dispatch={dispatch} action={action}></Education>)
 		}
 
 		return temp
-	}
+	})(state, dispatch, action)
 
 	return (
 		<div className="App">
 			Hi Athma! (´｡• ◡ •｡`) ♡
 			<br />
-			<Personal dispatch={dispatch} action={action}></Personal>
-			<WorkExp dispatch={dispatch} action={action}></WorkExp>
-			{displayMultipleWorkExp(state.multipleWorkExpAmounts, dispatch, action)}
-			<Education dispatch={dispatch} action={action}></Education>
-			<Skills dispatch={dispatch} action={action}></Skills>
+			{/* <Personal dispatch={dispatch} action={action}></Personal>
+			<WorkExp state={state} dispatch={dispatch} action={action}></WorkExp>
+			<Education state={state} dispatch={dispatch} action={action}></Education>
+			<Skills dispatch={dispatch} action={action}></Skills> */}
+			{renderForms.map((form: JSX.Element) => (
+				<div>{form}</div>
+			))}
 			<Preview
 				personal={state.allInfo.personal}
 				education={state.allInfo.education}
