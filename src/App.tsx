@@ -166,7 +166,7 @@ function App() {
 					<h1>CV Application</h1>
 					<div className="links">
 						<a href="https://github.com/Athma-Vasi">Made by Athma Vasi</a>
-						<a href="">View Code</a>
+						<a href="https://github.com/Athma-Vasi/CV-Application">View Code</a>
 					</div>
 					<Button
 						colour={
