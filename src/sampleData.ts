@@ -31,7 +31,7 @@ const sampleEducation = new Map([
 			toUni: '2013-04-30',
 			degree: 'Bachelor of Computer Science',
 			descriptionUni:
-				'Gave me the opportunity to study computer science. I learned a lot about programming and how to use it to solve problems. I also learned how to work with people and how to communicate with them.',
+				'Created a Java mobile app for finding chipped, lost pets. Developed a python based online calculator that placed second in the 2011 university coding competition. Partnered with journalism majors to attract 35 active members to the club in the first year using social media campaigns.',
 		},
 	],
 ])
