@@ -5,10 +5,14 @@ import Personal from './components/personal/Personal'
 import Preview from './components/preview/Preview'
 import WorkExp from './components/workExp/WorkExp'
 import Education from './components/education/Education'
-import { AppState, Dispatch, Action, ThemeState } from './types'
+import Skills from './components/skills/Skills'
+
 import Button from './components/styled-generics/Button'
 import Card from './components/styled-generics/Card'
 import Wrapper from './components/styled-generics/Wrapper'
+import Container from './components/styled-generics/Container'
+
+import { AppState, Dispatch, Action, ThemeState } from './types'
 
 import {
 	sampleEducation,
@@ -16,8 +20,7 @@ import {
 	sampleSkills,
 	sampleWorkExp,
 } from './sampleData'
-import Container from './components/styled-generics/Container'
-import Skills from './components/skills/Skills'
+import appReducer from './appReducer'
 
 const themeState: ThemeState = {
 	colour: {
@@ -53,65 +56,8 @@ const action: Action = {
 	updateMultipleEducationAmounts: 'updateMultipleEducationAmounts',
 }
 
-const reducer = (state: AppState, action: Dispatch) => {
-	const clone: AppState = structuredClone(state)
-
-	switch (action.type) {
-		case 'updatePersonal': {
-			if (action.payload.allInfo.personal_) {
-				clone.allInfo.personal = action?.payload?.allInfo?.personal_
-			}
-
-			return clone
-		}
-		case 'updateWorkExp': {
-			if (action.payload.allInfo.workExp_) {
-				clone.allInfo.workExp = action?.payload?.allInfo?.workExp_
-			}
-
-			return clone
-		}
-		case 'updateEducation': {
-			if (action.payload.allInfo.education_) {
-				clone.allInfo.education = action?.payload?.allInfo?.education_
-			}
-
-			return clone
-		}
-		case 'updateSkills': {
-			if (action.payload.allInfo.skills_) {
-				clone.allInfo.skills = action?.payload?.allInfo?.skills_
-			}
-
-			return clone
-		}
-		case 'toggleDarkMode': {
-			if (action.payload.isDarkMode !== undefined) {
-				clone.isDarkMode = action.payload.isDarkMode
-			}
-
-			return clone
-		}
-		case 'updateMultipleWorkExpAmounts': {
-			if (action.payload.updateMultipleWorkExpAmounts) {
-				clone.multipleWorkExpAmounts.push(action.payload.updateMultipleWorkExpAmounts)
-			}
-			return clone
-		}
-		case 'updateMultipleEducationAmounts': {
-			if (action.payload.updateMultipleEducationAmounts) {
-				clone.multipleEducationAmounts.push(action.payload.updateMultipleEducationAmounts)
-			}
-			return clone
-		}
-
-		default:
-			return clone
-	}
-}
-
 function App() {
-	const [state, dispatch] = useReducer(reducer, initialState)
+	const [state, dispatch] = useReducer(appReducer, initialState)
 	// console.log(state)
 
 	function handleNewWorkExpClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -240,10 +186,7 @@ function App() {
 						☀️
 					</Button>
 				</Container>
-				{/* <Personal dispatch={dispatch} action={action}></Personal>
-				<WorkExp state={state} dispatch={dispatch} action={action}></WorkExp>
-				<Education state={state} dispatch={dispatch} action={action}></Education>
-				<Skills dispatch={dispatch} action={action}></Skills> */}
+
 				<Card
 					colour={
 						state.isDarkMode

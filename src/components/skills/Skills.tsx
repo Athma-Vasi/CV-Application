@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import Card from '../styled-generics/Card'
 import Input from '../styled-generics/Input'
-import Wrapper from '../styled-generics/Wrapper'
-import Container from '../styled-generics/Container'
 import Button from '../styled-generics/Button'
 import { sampleSkills } from '../../sampleData'
 import { Dispatch, Action, SkillsMap, SkillsKey, AppState } from '../../types'
@@ -21,7 +19,6 @@ export default function Skills({
 	function handleSkillsChange(name: SkillsKey | string, value: string): void {
 		const clone: SkillsMap = structuredClone(skills)
 
-		//removes the starter value from the array
 		if (clone.has('temp')) clone.delete('temp')
 
 		setSkills(clone.set(name, value))

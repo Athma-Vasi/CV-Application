@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import Card from '../styled-generics/Card'
 import Input from '../styled-generics/Input'
-import Wrapper from '../styled-generics/Wrapper'
-import Container from '../styled-generics/Container'
 import Button from '../styled-generics/Button'
 import { EducationKeys, EducationMap, Dispatch, Action, AppState } from '../../types'
 import Textarea from '../styled-generics/Textarea'
@@ -23,7 +21,6 @@ export default function Education({
 		const clone: EducationMap = structuredClone(education)
 
 		if (clone.has('temp')) clone.delete('temp')
-		console.log({ clone })
 
 		if (!clone.has(`education${state.multipleEducationAmounts.at(-1)}`)) {
 			clone.set(`education${state.multipleEducationAmounts.at(-1)}`, {
@@ -52,8 +49,6 @@ export default function Education({
 				},
 			},
 		})
-
-		console.log(education)
 	}
 
 	function handleEducationFormSubmit(ev: React.FormEvent<HTMLFormElement>) {

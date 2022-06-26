@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import Card from '../styled-generics/Card'
-import Container from '../styled-generics/Container'
 import Input from '../styled-generics/Input'
-import Wrapper from '../styled-generics/Wrapper'
 import { samplePersonal } from '../../sampleData'
 import { Action, Dispatch, AppState } from '../../types'
 import Button from '../styled-generics/Button'

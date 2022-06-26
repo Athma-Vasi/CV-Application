@@ -1,19 +1,5 @@
-import React from 'react'
 import { AppState, EducationMap, PersonalMap, SkillsMap, WorkExpMap } from '../../types'
 import Card from '../styled-generics/Card'
-
-// type PersonalProps = Map<string, string>
-// type WorkExpProps = Map<
-// 	string,
-// 	{
-// 		companyName: string
-// 		locationWork: string
-// 		fromWork: string
-// 		toWork: string
-// 		role: string
-// 		descriptionWork: string
-// 	}
-// >
 
 export default function Preview({
 	personal,
@@ -113,13 +99,7 @@ export default function Preview({
 			})}
 
 			<h3 className="preview-heading">Skills</h3>
-			{/* {Object.entries(Object.fromEntries(skills)).map(([_, values]) =>
-				values.map((value) => (
-					<ul key={crypto.randomUUID()}>
-						<li key={crypto.randomUUID()}>{value}</li>
-					</ul>
-				))
-			)} */}
+
 			{Object.entries(Object.fromEntries(skills)).map(([_, values]) => (
 				<p className="preview-skills preview-content content" key={crypto.randomUUID()}>
 					{' '}

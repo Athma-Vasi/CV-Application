@@ -1,7 +1,5 @@
 import Card from '../styled-generics/Card'
 import Input from '../styled-generics/Input'
-import Wrapper from '../styled-generics/Wrapper'
-import Container from '../styled-generics/Container'
 import Button from '../styled-generics/Button'
 
 import { WorkExpMap, WorkExpKeys, Dispatch, Action, AppState } from '../../types'
