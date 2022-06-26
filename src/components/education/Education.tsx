@@ -16,13 +16,16 @@ export default function Education({
 	state: AppState
 }): JSX.Element {
 	const now = new Date()
-	const [education, setEducation] = useState(sampleEducation)
+	const [education, setEducation] = useState<EducationMap>(state.allInfo.education)
 
 	function handleEducationChange(name: EducationKeys | string, value: string): void {
 		const clone: EducationMap = structuredClone(education)
 
-		if (!clone.has(`education${state.multipleEducationAmounts}`)) {
-			clone.set(`education${state.multipleEducationAmounts}`, {
+		if (clone.has('temp')) clone.delete('temp')
+		console.log({ clone })
+
+		if (!clone.has(`education${state.multipleEducationAmounts.at(-1)}`)) {
+			clone.set(`education${state.multipleEducationAmounts.at(-1)}`, {
 				uni: '',
 				locationUni: '',
 				fromUni: '',
@@ -32,8 +35,11 @@ export default function Education({
 			})
 		}
 
-		const educationObj = clone.get(`education${state.multipleEducationAmounts}`)
-		if (educationObj) educationObj[name as EducationKeys] = value
+		const educationObj = clone.get(`education${state.multipleEducationAmounts.at(-1)}`)
+		if (educationObj) {
+			educationObj[name as EducationKeys] = value
+			clone.set(`education${state.multipleEducationAmounts.at(-1)}`, educationObj)
+		}
 
 		setEducation(clone)
 
@@ -45,6 +51,8 @@ export default function Education({
 				},
 			},
 		})
+
+		console.log(education)
 	}
 
 	return (

@@ -5,8 +5,8 @@ import Personal from './components/personal/Personal'
 import Preview from './components/preview/Preview'
 import WorkExp from './components/workExp/WorkExp'
 import Education from './components/education/Education'
-import Skills from './components/skills/Skills'
 import { AppState, Dispatch, Action } from './types'
+import Button from './components/styled-generics/Button'
 
 import {
 	sampleEducation,
@@ -94,7 +94,7 @@ const reducer = (state: AppState, action: Dispatch) => {
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	console.log(state)
+	// console.log(state)
 
 	// const displayMultipleWorkExp = ((
 	// 	workExpAmounts: number,
@@ -142,22 +142,22 @@ function App() {
 		temp.push(<Personal dispatch={dispatch} action={action}></Personal>)
 
 		temp.push(
-			<button type="button" onClick={handleNewWorkExpClick}>
+			<Button type="button" onClick={handleNewWorkExpClick}>
 				Add new work
-			</button>
+			</Button>
 		)
 
-		for (let i = 0; i < state.multipleWorkExpAmounts.length; i++) {
+		for (let i = 0; i < state.multipleWorkExpAmounts.length; i += 1) {
 			temp.push(<WorkExp state={state} dispatch={dispatch} action={action}></WorkExp>)
 		}
 
 		temp.push(
-			<button type="button" onClick={handleNewEducationClick}>
+			<Button type="button" onClick={handleNewEducationClick}>
 				Add new education
-			</button>
+			</Button>
 		)
 
-		for (let i = 0; i < state.multipleEducationAmounts.length; i++) {
+		for (let i = 0; i < state.multipleEducationAmounts.length; i += 1) {
 			temp.push(<Education state={state} dispatch={dispatch} action={action}></Education>)
 		}
 

@@ -18,15 +18,16 @@ export default function WorkExp({
 }): JSX.Element {
 	const now = new Date()
 
-	const [workExp, setWorkExp] = useState(sampleWorkExp)
+	const [workExp, setWorkExp] = useState<WorkExpMap>(state.allInfo.workExp)
 
 	function handleWorkExpChange(name: WorkExpKeys | string, value: string): void {
 		const clone: WorkExpMap = structuredClone(workExp)
+		console.log({ clone })
 
 		if (clone.has('temp')) clone.delete('temp')
 
-		if (!clone.has(`workExp${state.multipleWorkExpAmounts}`)) {
-			clone.set(`workExp${state.multipleWorkExpAmounts}`, {
+		if (!clone.has(`workExp${state.multipleWorkExpAmounts.at(-1)}`)) {
+			clone.set(`workExp${state.multipleWorkExpAmounts.at(-1)}`, {
 				companyName: '',
 				locationWork: '',
 				fromWork: '',
@@ -36,8 +37,11 @@ export default function WorkExp({
 			})
 		}
 
-		const workExpObj = clone.get(`workExp${state.multipleWorkExpAmounts}`)
-		if (workExpObj) workExpObj[name as WorkExpKeys] = value
+		const workExpObj = clone.get(`workExp${state.multipleWorkExpAmounts.at(-1)}`)
+		if (workExpObj) {
+			workExpObj[name as WorkExpKeys] = value
+			clone.set(`workExp${state.multipleWorkExpAmounts.at(-1)}`, workExpObj)
+		}
 
 		setWorkExp(clone)
 
@@ -49,6 +53,8 @@ export default function WorkExp({
 				},
 			},
 		})
+
+		console.log({ workExp })
 	}
 
 	return (

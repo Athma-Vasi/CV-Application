@@ -49,10 +49,9 @@ const sampleWorkExp = new Map([
 // 		],
 // 	],
 // ])
-
 const sampleEducation = new Map([
 	[
-		'education0',
+		'temp',
 		{
 			uni: 'University of Berkeley',
 			locationUni: 'Berkeley, CA',
