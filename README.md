@@ -1,46 +1,42 @@
-# Getting Started with Create React App
+# CV-Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CV-Application as part of The Odin Project curriculum
 
-## Available Scripts
+[Click here to view project live](https://athma-vasi.github.io/CV-Application/)
 
-In the project directory, you can run:
+## Things I learned
 
-### `npm start`
+### TL;DR
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React
+- Hooks
+- useReducer
+- styled-components
+- dark mode
+- JSX
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### React
 
-### `npm test`
+This is my first official React project and I must say, it was kinda tough going in the beginning. I had already worked out a system to render and update using plain javascript, and I now realize how utterly unscalable that was. I finally understand the difference between declarative programming in React and imperative programming in plain javascript.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Using create-react-app feels like magic. I sincerely hope none of the >1200 dependent modules ever break...
 
-### `npm run build`
+### Hooks
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I did have time with the traditional way of using class components. However, I decided to learn the modern way of using React, and went all-in on hooks. In preparation for learning Redux, I practised using useReducer for overall appState management in this project. Although I did use useState for local state management.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+I like the idea of having a centralized state management. Passing dispatch functions down and having local states trigger update was easier to reason about than a multitude of useStates peppered throughout.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Next stop: all the rest of the hooks, then custom hooks
 
-### `npm run eject`
+### styled-components
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+In my on-going quest towards reducing the amount of CSS I have to write, I have finally hit upon a solution that I like. styled-components promises modularity by using tagged templates.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+I still had to write global CSS as I am still experimenting with styled-components, but I see the light(mode)! It allowed me to do dark mode in a fairly straightforward way, something I had been looking forward to implement ever since I started this journey.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Next stop: using HOCs to further improve component reusability
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### JSX
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+This is the killer feature of React imo. At first, I was horrified having to write HTML-like syntax in my javascript, but I am now a convert. With the zeal of the newly converted, I am ready to preach to the unconverted! It was bit of an uphill struggle figuring out conditional rendering though.
