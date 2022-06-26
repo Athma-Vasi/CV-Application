@@ -3,19 +3,22 @@ import Card from '../styled-generics/Card'
 import Input from '../styled-generics/Input'
 import Wrapper from '../styled-generics/Wrapper'
 import Container from '../styled-generics/Container'
+import Button from '../styled-generics/Button'
 import { sampleSkills } from '../../sampleData'
-import { Dispatch, Action, SkillsMap, SkillsKeys } from '../../types'
+import { Dispatch, Action, SkillsMap, SkillsKey, AppState } from '../../types'
 
 export default function Skills({
 	dispatch,
 	action,
+	state,
 }: {
 	dispatch: React.Dispatch<Dispatch>
 	action: Action
+	state: AppState
 }): JSX.Element {
 	const [skills, setSkills] = useState(sampleSkills)
 
-	function handleSkillsChange(name: SkillsKeys | string, value: string): void {
+	function handleSkillsChange(name: SkillsKey | string, value: string): void {
 		const clone: SkillsMap = structuredClone(skills)
 
 		//removes the starter value from the array
@@ -33,32 +36,94 @@ export default function Skills({
 		})
 	}
 
+	function handleSkillsFormSubmit(ev: React.FormEvent<HTMLFormElement>) {
+		ev.preventDefault()
+
+		const formData = new FormData(ev.currentTarget)
+		const skillsFormData = formData.get('skills')?.toString() ?? ''
+
+		setSkills(structuredClone(skills).set('skills', skillsFormData))
+
+		dispatch({
+			type: action.updateSkills,
+			payload: {
+				allInfo: {
+					skills_: skills,
+				},
+			},
+		})
+	}
+
 	return (
 		<>
-			<Wrapper>
-				<Container>
-					<form action="#" id="form-skills">
-						<fieldset>
-							<legend>Skills</legend>
-							<Card>
-								<label htmlFor="skills"></label>
-								<Input
-									type="text"
-									name="skills"
-									id="skills"
-									minLength={2}
-									maxLength={31}
-									placeholder="i.e., communication, teamwork"
-									pattern="[a-zA-Z0-9]+"
-									onChange={(ev) =>
-										handleSkillsChange(ev.currentTarget.name, ev.currentTarget.value)
-									}
-								/>
-							</Card>
-						</fieldset>
-					</form>
-				</Container>
-			</Wrapper>
+			<form action="#" id="form-skills" onSubmit={handleSkillsFormSubmit}>
+				<fieldset>
+					<legend>Skills</legend>
+					<Card
+						colour={
+							state.isDarkMode
+								? state.themeState.colour.dark
+								: state.themeState.colour.light
+						}
+						backgroundColour={
+							state.isDarkMode
+								? state.themeState.backgroundColour.dark
+								: state.themeState.backgroundColour.light
+						}
+					>
+						<label htmlFor="skills"></label>
+						<Input
+							colour={
+								state.isDarkMode
+									? state.themeState.colour.dark
+									: state.themeState.colour.light
+							}
+							backgroundColour={
+								state.isDarkMode
+									? state.themeState.backgroundColour.dark
+									: state.themeState.backgroundColour.light
+							}
+							type="text"
+							name="skills"
+							id="skills"
+							minLength={2}
+							maxLength={31}
+							placeholder="i.e., communication, teamwork"
+							onChange={(ev) =>
+								handleSkillsChange(ev.currentTarget.name, ev.currentTarget.value)
+							}
+						/>
+					</Card>
+					<Card
+						colour={
+							state.isDarkMode
+								? state.themeState.colour.dark
+								: state.themeState.colour.light
+						}
+						backgroundColour={
+							state.isDarkMode
+								? state.themeState.backgroundColour.dark
+								: state.themeState.backgroundColour.light
+						}
+					>
+						<Button
+							colour={
+								state.isDarkMode
+									? state.themeState.colour.dark
+									: state.themeState.colour.light
+							}
+							backgroundColour={
+								state.isDarkMode
+									? state.themeState.backgroundColour.dark
+									: state.themeState.backgroundColour.light
+							}
+							type="submit"
+						>
+							Save
+						</Button>
+					</Card>
+				</fieldset>
+			</form>
 		</>
 	)
 }

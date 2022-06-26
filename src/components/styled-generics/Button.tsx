@@ -3,12 +3,14 @@ import React from 'react'
 
 type PropsButton = {
 	colour?: string
+	backgroundColour?: string
 }
 
 const Button = styled.button<PropsButton>`
 	background-color: transparent;
 	color: ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
-	background-color: transparent;
+	background-color: ${({ backgroundColour }) =>
+		backgroundColour ? backgroundColour : 'white'};
 	font-family: inherit;
 	cursor: pointer;
 
@@ -32,8 +34,9 @@ const Button = styled.button<PropsButton>`
 
 	&:hover,
 	&:active {
-		background-color: ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
-		color: hsl(0, 0%, 100%);
+		color: ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
+		background-color: ${({ backgroundColour }) =>
+			backgroundColour ? backgroundColour : 'white'};
 	}
 
 	&:focus {

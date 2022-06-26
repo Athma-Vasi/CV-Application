@@ -1,3 +1,98 @@
-.preview {
-	outline: 1px solid cornflowerblue;
+body {
+	display: grid;
+	place-content: center;
+	z-index: -3;
+	background-color: hsl(0, 0%, 97%);
+}
+
+.App {
+	width: clamp(16rem, 90vw, 70rem);
+}
+
+.heading-container {
+	width: clamp(16rem, 90vw, 70rem);
+	height: 10rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	place-content: center;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.content-container {
+	width: clamp(16rem, 90vw, 70rem);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	margin-left: -3rem;
+}
+
+.preview-container {
+	width: calc(100% - 1rem);
+	padding-left: 1rem;
+}
+
+.preview-heading {
+	font-size: 2rem;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.preview-subHeading {
+	font-size: 1.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	font-weight: 600;
+}
+
+.content {
+	line-height: 1.5;
+}
+
+fieldset {
+	padding-left: 1rem;
+}
+
+.preview-subHeading {
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+.preview-content {
+	font-size: 1.2rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+#form-personal,
+#form-workExp,
+#form-education,
+#form-skills {
+	width: 25rem;
+	padding-bottom: 1rem;
+	padding-top: 1rem;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.links {
+	width: min(40ch, 100% - 2rem);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }

@@ -41,7 +41,18 @@ type EducationKeys =
 	| 'descriptionUni'
 
 type SkillsMap = Map<string, string>
-type SkillsKeys = 'skills'
+type SkillsKey = 'skills'
+
+type ThemeState = {
+	colour: {
+		light: string
+		dark: string
+	}
+	backgroundColour: {
+		light: string
+		dark: string
+	}
+}
 
 type AppState = {
 	allInfo: {
@@ -53,6 +64,7 @@ type AppState = {
 	isDarkMode: boolean
 	multipleWorkExpAmounts: number[]
 	multipleEducationAmounts: number[]
+	themeState: ThemeState
 }
 
 type Dispatch = {
@@ -82,6 +94,7 @@ type Action = {
 
 export {
 	AppState,
+	ThemeState,
 	Dispatch,
 	Action,
 	PersonalMap,
@@ -90,5 +103,5 @@ export {
 	EducationMap,
 	EducationKeys,
 	SkillsMap,
-	SkillsKeys,
+	SkillsKey,
 }

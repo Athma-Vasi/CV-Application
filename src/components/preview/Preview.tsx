@@ -1,5 +1,6 @@
 import React from 'react'
-import { EducationMap, PersonalMap, SkillsMap, WorkExpMap } from '../../types'
+import { AppState, EducationMap, PersonalMap, SkillsMap, WorkExpMap } from '../../types'
+import Card from '../styled-generics/Card'
 
 // type PersonalProps = Map<string, string>
 // type WorkExpProps = Map<
@@ -19,32 +20,99 @@ export default function Preview({
 	workExp,
 	education,
 	skills,
+	state,
 }: {
 	personal: PersonalMap
 	workExp: WorkExpMap
 	education: EducationMap
 	skills: SkillsMap
+	state: AppState
 }) {
 	return (
-		<>
-			<h3>Personal</h3>
-			{Object.entries(Object.fromEntries(personal)).map(([key, value]) => (
-				<p key={key}>{value}</p>
-			))}
+		<Card
+			colour={
+				state.isDarkMode ? state.themeState.colour.dark : state.themeState.colour.light
+			}
+			backgroundColour={
+				state.isDarkMode
+					? state.themeState.backgroundColour.dark
+					: state.themeState.backgroundColour.light
+			}
+		>
+			<h3 className="preview-heading">Personal</h3>
+			{Object.entries(Object.fromEntries(personal)).map(([key, value]) => {
+				return key === 'firstname' || key === 'lastname' ? (
+					<p className="preview-personal preview-subHeading content" key={key}>
+						{value}
+					</p>
+				) : (
+					<p className="preview-personal preview-content content" key={key}>
+						{value}
+					</p>
+				)
+			})}
 
-			<h3>Work Experience</h3>
+			<h3 className="preview-heading">Work Experience</h3>
 			{Object.entries(Object.fromEntries(workExp)).map(([_, values]) => {
-				return Object.entries(values).map(([key, value]) => (
-					<p key={crypto.randomUUID()}>{value}</p>
-				))
+				return Object.entries(values).map(([key, value]) => {
+					return key === 'companyName' || key === 'role' ? (
+						<p
+							className="preview-workExp preview-subHeading content"
+							key={crypto.randomUUID()}
+						>
+							{value}
+						</p>
+					) : key === 'descriptionWork' ? (
+						<p
+							className="preview-workExp preview-content content"
+							key={crypto.randomUUID()}
+						>
+							{value.split('. ').map((value) => (
+								<li>{value}</li>
+							))}
+						</p>
+					) : (
+						<p
+							className="preview-workExp preview-content content"
+							key={crypto.randomUUID()}
+						>
+							{value}
+						</p>
+					)
+				})
 			})}
 
-			<h3>Education</h3>
+			<h3 className="preview-heading">Education</h3>
 			{Object.entries(Object.fromEntries(education)).map(([_, values]) => {
-				return Object.entries(values).map(([key, value]) => <p key={key}>{value}</p>)
+				return Object.entries(values).map(([key, value]) => {
+					return key === 'uni' || key === 'degree' ? (
+						<p
+							className="preview-education preview-subHeading content"
+							key={crypto.randomUUID()}
+						>
+							{value}
+						</p>
+					) : key === 'descriptionUni' ? (
+						<p
+							className="preview-education preview-content content"
+							key={crypto.randomUUID()}
+						>
+							{value.split('. ').map((value) => (
+								<li>{value}</li>
+							))}
+						</p>
+					) : (
+						<p
+							className="preview-education preview-content content"
+							key={crypto.randomUUID()}
+						>
+							{value}
+						</p>
+					)
+				})
 			})}
 
-			<h3>Skills</h3>
+			<h3 className="preview-heading">Skills</h3>
 			{/* {Object.entries(Object.fromEntries(skills)).map(([_, values]) =>
 				values.map((value) => (
 					<ul key={crypto.randomUUID()}>
@@ -53,8 +121,13 @@ export default function Preview({
 				))
 			)} */}
 			{Object.entries(Object.fromEntries(skills)).map(([_, values]) => (
-				<p key={crypto.randomUUID()}> {values}</p>
+				<p className="preview-skills preview-content content" key={crypto.randomUUID()}>
+					{' '}
+					{values.split(', ').map((value) => (
+						<li>{value}</li>
+					))}
+				</p>
 			))}
-		</>
+		</Card>
 	)
 }
