@@ -10,6 +10,7 @@ const Textarea = styled.textarea<PropsTextarea>`
 	font-size: max(16px, 1em);
 	font-family: inherit;
 	width: 100%;
+	resize: none;
 
 	padding: 0.25em 0.5em;
 	color: ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
