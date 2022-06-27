@@ -22,10 +22,12 @@ export default function WorkExp({
 	function handleWorkExpChange(name: WorkExpKeys | string, value: string): void {
 		const clone: WorkExpMap = structuredClone(workExp)
 
+		const workExpPlusAmount = `workExp${state.multipleWorkExpAmounts.at(-1)}`
+
 		if (clone.has('temp')) clone.delete('temp')
 
-		if (!clone.has(`workExp${state.multipleWorkExpAmounts.at(-1)}`)) {
-			clone.set(`workExp${state.multipleWorkExpAmounts.at(-1)}`, {
+		if (!clone.has(workExpPlusAmount)) {
+			clone.set(workExpPlusAmount, {
 				companyName: '',
 				locationWork: '',
 				fromWork: '',
@@ -35,10 +37,10 @@ export default function WorkExp({
 			})
 		}
 
-		const workExpObj = clone.get(`workExp${state.multipleWorkExpAmounts.at(-1)}`)
+		const workExpObj = clone.get(workExpPlusAmount)
 		if (workExpObj) {
 			workExpObj[name as WorkExpKeys] = value
-			clone.set(`workExp${state.multipleWorkExpAmounts.at(-1)}`, workExpObj)
+			clone.set(workExpPlusAmount, workExpObj)
 		}
 
 		setWorkExp(clone)
@@ -57,19 +59,17 @@ export default function WorkExp({
 		ev.preventDefault()
 
 		const formData = new FormData(ev.currentTarget)
-		const companyName = formData.get('companyName')?.toString() ?? ''
-		const locationWork = formData.get('locationWork')?.toString() ?? ''
-		const fromWork = formData.get('fromWork')?.toString() ?? ''
-		const toWork = formData.get('toWork')?.toString() ?? ''
-		const role = formData.get('role')?.toString() ?? ''
-		const descriptionWork = formData.get('descriptionWork')?.toString() ?? ''
 
-		setWorkExp(structuredClone(workExp).set('companyName', companyName))
-		setWorkExp(structuredClone(workExp).set('locationWork', locationWork))
-		setWorkExp(structuredClone(workExp).set('fromWork', fromWork))
-		setWorkExp(structuredClone(workExp).set('toWork', toWork))
-		setWorkExp(structuredClone(workExp).set('role', role))
-		setWorkExp(structuredClone(workExp).set('descriptionWork', descriptionWork))
+		setWorkExp(
+			structuredClone(workExp).set('workExpPlusAmount', {
+				companyName: formData.get('companyName')?.toString() ?? '',
+				locationWork: formData.get('locationWork')?.toString() ?? '',
+				fromWork: formData.get('fromWork')?.toString() ?? '',
+				toWork: formData.get('toWork')?.toString() ?? '',
+				role: formData.get('role')?.toString() ?? '',
+				descriptionWork: formData.get('descriptionWork')?.toString() ?? '',
+			})
+		)
 
 		dispatch({
 			type: action.updateWorkExp,

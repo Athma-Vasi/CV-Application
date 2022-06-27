@@ -18,7 +18,7 @@ const Button = styled.button<PropsButton>`
 	min-height: 3em;
 	line-height: 1.1;
 
-	border: none;
+	border: 1px solid ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
 	border-radius: 8px;
 
 	box-shadow: 0px 3px 5px hsl(0, 0%, 0%, 0.18);
@@ -33,15 +33,14 @@ const Button = styled.button<PropsButton>`
 
 	&:hover,
 	&:active {
-		color: ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
-		background-color: ${({ backgroundColour }) =>
-			backgroundColour ? backgroundColour : 'white'};
+		color: ${({ backgroundColour }) => (backgroundColour ? backgroundColour : 'white')};
+		background-color: ${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
 	}
 
 	&:focus {
 		outline-style: solid;
 		outline-color: transparent;
-		box-shadow: 0px 0px 0px 4px
+		box-shadow: 0px 0px 0px 3px
 			${({ colour }) => (colour ? colour : 'hsl(180, 100%, 25%)')};
 	}
 

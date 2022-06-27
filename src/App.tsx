@@ -25,11 +25,11 @@ import appReducer from './appReducer'
 const themeState: ThemeState = {
 	colour: {
 		light: 'hsl(0, 0%, 25%)',
-		dark: 'hsl(0, 0%, 62%)',
+		dark: 'hsl(0, 0%, 75%)',
 	},
 	backgroundColour: {
 		light: 'hsl(0, 0%, 97%)',
-		dark: 'hsl(0, 0%, 15%)',
+		dark: 'hsl(0, 0%, 11%)',
 	},
 }
 
@@ -58,7 +58,6 @@ const action: Action = {
 
 function App() {
 	const [state, dispatch] = useReducer(appReducer, initialState)
-	// console.log(state)
 
 	function handleNewWorkExpClick(ev: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 		dispatch({
@@ -179,7 +178,17 @@ function App() {
 								? state.themeState.backgroundColour.dark
 								: state.themeState.backgroundColour.light
 						}
-						style={{ clipPath: 'circle()', fontSize: '2rem' }}
+						style={{
+							clipPath: 'circle()',
+							fontSize: '2rem',
+							border: 'none',
+							outline: 'none',
+							minWidth: '2rem',
+							minHeight: '2rem',
+							marginTop: '-1.5rem',
+							marginRight: '1rem',
+							paddingTop: '1rem',
+						}}
 						type="button"
 						onClick={handleToggleThemeClick}
 					>

@@ -20,10 +20,12 @@ export default function Education({
 	function handleEducationChange(name: EducationKeys | string, value: string): void {
 		const clone: EducationMap = structuredClone(education)
 
+		const educationPlusAmount = `education${state.multipleEducationAmounts.at(-1)}`
+
 		if (clone.has('temp')) clone.delete('temp')
 
-		if (!clone.has(`education${state.multipleEducationAmounts.at(-1)}`)) {
-			clone.set(`education${state.multipleEducationAmounts.at(-1)}`, {
+		if (!clone.has(educationPlusAmount)) {
+			clone.set(educationPlusAmount, {
 				uni: '',
 				locationUni: '',
 				fromUni: '',
@@ -33,10 +35,10 @@ export default function Education({
 			})
 		}
 
-		const educationObj = clone.get(`education${state.multipleEducationAmounts.at(-1)}`)
+		const educationObj = clone.get(educationPlusAmount)
 		if (educationObj) {
 			educationObj[name as EducationKeys] = value
-			clone.set(`education${state.multipleEducationAmounts.at(-1)}`, educationObj)
+			clone.set(educationPlusAmount, educationObj)
 		}
 
 		setEducation(clone)
@@ -55,19 +57,17 @@ export default function Education({
 		ev.preventDefault()
 
 		const formData = new FormData(ev.currentTarget)
-		const uni = formData.get('uni')?.toString() ?? ''
-		const locationUni = formData.get('locationUni')?.toString() ?? ''
-		const fromUni = formData.get('fromUni')?.toString() ?? ''
-		const toUni = formData.get('toUni')?.toString() ?? ''
-		const degree = formData.get('degree')?.toString() ?? ''
-		const descriptionUni = formData.get('descriptionUni')?.toString() ?? ''
 
-		setEducation(structuredClone(education).set('uni', uni))
-		setEducation(structuredClone(education).set('locationUni', locationUni))
-		setEducation(structuredClone(education).set('fromUni', fromUni))
-		setEducation(structuredClone(education).set('toUni', toUni))
-		setEducation(structuredClone(education).set('degree', degree))
-		setEducation(structuredClone(education).set('descriptionUni', descriptionUni))
+		setEducation(
+			structuredClone(education).set('educationPlusAmount', {
+				uni: formData.get('uni')?.toString() ?? '',
+				locationUni: formData.get('locationUni')?.toString() ?? '',
+				fromUni: formData.get('fromUni')?.toString() ?? '',
+				toUni: formData.get('toUni')?.toString() ?? '',
+				degree: formData.get('degree')?.toString() ?? '',
+				descriptionUni: formData.get('descriptionUni')?.toString() ?? '',
+			})
+		)
 
 		dispatch({
 			type: action.updateEducation,

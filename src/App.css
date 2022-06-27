@@ -14,10 +14,22 @@ body {
 	height: 10rem;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 	padding-left: 1rem;
 	padding-right: 1rem;
-	place-content: center;
+	margin-left: -2.5rem;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.links {
+	width: min(30ch, 100% - 2rem);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .form-container {
@@ -83,16 +95,4 @@ fieldset {
 	width: 25rem;
 	padding-bottom: 1rem;
 	padding-top: 1rem;
-}
-
-a {
-	text-decoration: none;
-	color: inherit;
-}
-
-.links {
-	width: min(40ch, 100% - 2rem);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
