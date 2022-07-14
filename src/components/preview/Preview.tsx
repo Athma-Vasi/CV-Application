@@ -42,26 +42,17 @@ export default function Preview({
 			{Object.entries(Object.fromEntries(workExp)).map(([_, values]) => {
 				return Object.entries(values).map(([key, value]) => {
 					return key === 'companyName' || key === 'role' ? (
-						<p
-							className="preview-workExp preview-subHeading content"
-							key={crypto.randomUUID()}
-						>
+						<p className="preview-workExp preview-subHeading content" key={key}>
 							{value}
 						</p>
 					) : key === 'descriptionWork' ? (
-						<p
-							className="preview-workExp preview-content content"
-							key={crypto.randomUUID()}
-						>
-							{value.split('. ').map((value) => (
-								<li>{value}</li>
+						<p className="preview-workExp preview-content content" key={key}>
+							{value.split('. ').map((value, i) => (
+								<li key={i}>{value}</li>
 							))}
 						</p>
 					) : (
-						<p
-							className="preview-workExp preview-content content"
-							key={crypto.randomUUID()}
-						>
+						<p className="preview-workExp preview-content content" key={key}>
 							{value}
 						</p>
 					)
@@ -72,26 +63,17 @@ export default function Preview({
 			{Object.entries(Object.fromEntries(education)).map(([_, values]) => {
 				return Object.entries(values).map(([key, value]) => {
 					return key === 'uni' || key === 'degree' ? (
-						<p
-							className="preview-education preview-subHeading content"
-							key={crypto.randomUUID()}
-						>
+						<p className="preview-education preview-subHeading content" key={key}>
 							{value}
 						</p>
 					) : key === 'descriptionUni' ? (
-						<p
-							className="preview-education preview-content content"
-							key={crypto.randomUUID()}
-						>
-							{value.split('. ').map((value) => (
-								<li>{value}</li>
+						<p className="preview-education preview-content content" key={key}>
+							{value.split('. ').map((value: string, i: number) => (
+								<li key={i}>{value}</li>
 							))}
 						</p>
 					) : (
-						<p
-							className="preview-education preview-content content"
-							key={crypto.randomUUID()}
-						>
+						<p className="preview-education preview-content content" key={key}>
 							{value}
 						</p>
 					)
@@ -100,11 +82,11 @@ export default function Preview({
 
 			<h3 className="preview-heading">Skills</h3>
 
-			{Object.entries(Object.fromEntries(skills)).map(([_, values]) => (
-				<p className="preview-skills preview-content content" key={crypto.randomUUID()}>
+			{Object.entries(Object.fromEntries(skills)).map(([key, values]) => (
+				<p className="preview-skills preview-content content" key={key}>
 					{' '}
-					{values.split(', ').map((value) => (
-						<li>{value}</li>
+					{values.split(', ').map((value, i) => (
+						<li key={i}>{value}</li>
 					))}
 				</p>
 			))}

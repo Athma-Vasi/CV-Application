@@ -210,8 +210,8 @@ function App() {
 				>
 					<div className="content-container">
 						<div className="form-container">
-							{renderForms.map((form: JSX.Element) => (
-								<div>{form}</div>
+							{renderForms.map((form: JSX.Element, i: number) => (
+								<div key={i}>{form}</div>
 							))}
 						</div>
 						<div className="preview-container">
