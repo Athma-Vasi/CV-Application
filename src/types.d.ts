@@ -12,6 +12,15 @@ type WorkExpMap = Map<
 	}
 >
 
+type WorkExpObj = {
+	companyName: string
+	locationWork: string
+	fromWork: string
+	toWork: string
+	role: string
+	descriptionWork: string
+}
+
 type WorkExpKeys =
 	| 'companyName'
 	| 'locationWork'
@@ -31,6 +40,15 @@ type EducationMap = Map<
 		descriptionUni: string
 	}
 >
+
+type EducationObj = {
+	uni: string
+	locationUni: string
+	fromUni: string
+	toUni: string
+	degree: string
+	descriptionUni: string
+}
 
 type EducationKeys =
 	| 'uni'
@@ -99,8 +117,10 @@ export {
 	Action,
 	PersonalMap,
 	WorkExpMap,
+	WorkExpObj,
 	WorkExpKeys,
 	EducationMap,
+	EducationObj,
 	EducationKeys,
 	SkillsMap,
 	SkillsKey,
