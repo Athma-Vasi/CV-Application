@@ -132,7 +132,7 @@ export default function Education({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="locationUni">Location: </label>
+						<label htmlFor="locationUni">Education location: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -166,7 +166,7 @@ export default function Education({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="fromUni">From: </label>
+						<label htmlFor="fromUni">Education from: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -179,6 +179,7 @@ export default function Education({
 									: state.themeState.backgroundColour.light
 							}
 							type="date"
+							role="date"
 							id="fromUni"
 							name="fromUni"
 							min={`${now.getFullYear() - 100}-${
@@ -205,7 +206,7 @@ export default function Education({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="toUni">To: </label>
+						<label htmlFor="toUni">Education to: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -218,6 +219,7 @@ export default function Education({
 									: state.themeState.backgroundColour.light
 							}
 							type="date"
+							role="date"
 							name="toUni"
 							id="toUni"
 							min={`${now.getFullYear() - 100}-${
@@ -279,7 +281,7 @@ export default function Education({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="descriptionUni">Description: </label>
+						<label htmlFor="descriptionUni">Education description: </label>
 						<Textarea
 							colour={
 								state.isDarkMode

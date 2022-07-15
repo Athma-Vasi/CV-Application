@@ -134,7 +134,7 @@ export default function WorkExp({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="locationWork">Location: </label>
+						<label htmlFor="locationWork">Work location: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -170,7 +170,7 @@ export default function WorkExp({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="fromWork">From: </label>
+						<label htmlFor="fromWork">Work from: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -183,6 +183,7 @@ export default function WorkExp({
 									: state.themeState.backgroundColour.light
 							}
 							type="date"
+							role="date"
 							id="fromWork"
 							name="fromWork"
 							min={`${now.getFullYear() - 100}-${
@@ -209,7 +210,7 @@ export default function WorkExp({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="toWork">To: </label>
+						<label htmlFor="toWork">Work to: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -222,6 +223,7 @@ export default function WorkExp({
 									: state.themeState.backgroundColour.light
 							}
 							type="date"
+							role="date"
 							name="toWork"
 							id="toWork"
 							min={`${now.getFullYear() - 100}-${
@@ -248,7 +250,7 @@ export default function WorkExp({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="role">Role: </label>
+						<label htmlFor="role">Work role: </label>
 						<Input
 							colour={
 								state.isDarkMode
@@ -284,7 +286,7 @@ export default function WorkExp({
 								: state.themeState.backgroundColour.light
 						}
 					>
-						<label htmlFor="descriptionWork">Description: </label>
+						<label htmlFor="descriptionWork">Work description: </label>
 						<Textarea
 							colour={
 								state.isDarkMode

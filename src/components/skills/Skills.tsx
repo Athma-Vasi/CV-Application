@@ -55,7 +55,7 @@ export default function Skills({
 		<>
 			<form action="#" id="form-skills" onSubmit={handleSkillsFormSubmit}>
 				<fieldset>
-					<legend>Skills</legend>
+					<legend data-testid="skills-label">Skills</legend>
 					<Card
 						colour={
 							state.isDarkMode
@@ -82,6 +82,7 @@ export default function Skills({
 							}
 							type="text"
 							name="skills"
+							data-testid="skills-input"
 							id="skills"
 							minLength={2}
 							maxLength={31}
