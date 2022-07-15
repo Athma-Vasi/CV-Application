@@ -262,7 +262,7 @@ export default function Personal({
 								}
 								type="submit"
 							>
-								Save
+								Save personal
 							</Button>
 						</Card>
 					</Card>
